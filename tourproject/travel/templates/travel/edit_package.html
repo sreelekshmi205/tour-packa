@@ -1,0 +1,37 @@
+{% extends 'travel/base.html' %}
+{% block content %}
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7 col-md-9">
+      <div class="card border-0 shadow-lg rounded-4">
+        <div class="card-header bg-gradient-primary text-white text-center py-4 rounded-top-4">
+          <h2 class="mb-0 fw-bold">Edit Package</h2>
+          <small class="opacity-75">Update your travel package details below</small>
+        </div>
+        <div class="card-body p-5">
+          <form method="post" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary btn-lg shadow-sm text-uppercase fw-semibold">
+                Update Package
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer text-center text-muted small fst-italic py-3 rounded-bottom-4">
+          Make sure all information is correct before submitting.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #3a8dde 0%, #1a237e 100%);
+}
+</style>
+
+{% endblock %}

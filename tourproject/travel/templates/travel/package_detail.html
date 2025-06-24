@@ -1,0 +1,33 @@
+{% extends 'travel/base.html' %}
+{% block content %}
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow border-0">
+        {% if package.image %}
+        <img src="{{ package.image.url }}" class="card-img-top" alt="{{ package.title }}">
+        {% endif %}
+        <div class="card-body">
+          <h2 class="card-title text-primary fw-bold mb-3">{{ package.title }}</h2>
+          <p class="mb-2"><strong class="text-muted">Destination:</strong> {{ package.destination }}</p>
+          <p class="mb-2"><strong class="text-muted">Duration:</strong> {{ package.duration_days }} days</p>
+          <p class="mb-2"><strong class="text-muted">Price:</strong> ₹{{ package.price }}</p>
+          <hr>
+          <p class="mb-4"><strong class="text-muted">Description:</strong><br>{{ package.description }}</p>
+
+          {% if user.is_authenticated %}
+            <form method="post" action="{% url 'book_package' package.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary btn-lg">Book Now</button>
+            </form>
+          {% else %}
+            <p class="mt-4"><a href="{% url 'login' %}" class="btn btn-outline-secondary">Login to Book</a></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

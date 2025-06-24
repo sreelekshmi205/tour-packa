@@ -1,0 +1,100 @@
+{% extends 'travel/base.html' %}
+{% block content %}
+
+<style>
+  h2 {
+    font-size: 2.4rem;
+    color: #0d6efd;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  a.add-package-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 18px;
+    background: #0d6efd;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  a.add-package-btn:hover {
+    background-color: #084298;
+    box-shadow: 0 6px 18px rgba(8, 66, 152, 0.4);
+  }
+  ul.package-list {
+    list-style: none;
+    padding-left: 0;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  ul.package-list li {
+    background: #fff;
+    margin-bottom: 15px;
+    padding: 18px 22px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    font-size: 1.1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  ul.package-list li strong {
+    color: #212529;
+    font-weight: 700;
+    flex: 1 1 100%;
+    margin-bottom: 8px;
+  }
+  ul.package-list li a {
+    color: #0d6efd;
+    font-weight: 600;
+    margin: 0 10px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  ul.package-list li a:hover {
+    color: #084298;
+  }
+  ul.package-list li .approved-status {
+    font-weight: 600;
+    color: #198754; /* green */
+    flex: 1 1 100%;
+    margin-top: 8px;
+  }
+  @media (min-width: 600px) {
+    ul.package-list li strong {
+      flex: 0 0 auto;
+      margin-bottom: 0;
+      margin-right: 15px;
+      font-size: 1.2rem;
+    }
+    ul.package-list li .approved-status {
+      flex: 0 0 auto;
+      margin-top: 0;
+    }
+  }
+</style>
+
+<h2>Your Packages</h2>
+<a href="{% url 'add_package' %}" class="add-package-btn">Add New Package</a>
+
+<ul class="package-list">
+  {% for pkg in packages %}
+  <li>
+    <strong>{{ pkg.title }}</strong>
+    <div>
+      <a href="{% url 'edit_package' pkg.pk %}">Edit</a> |
+      <a href="{% url 'delete_package' pkg.pk %}">Delete</a>
+    </div>
+    <div class="approved-status">Approved: {{ pkg.approved }}</div>
+  </li>
+  {% empty %}
+  <li>No packages found.</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

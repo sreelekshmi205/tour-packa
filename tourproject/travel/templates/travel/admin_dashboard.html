@@ -1,0 +1,92 @@
+{% extends 'travel/base.html' %}
+{% block content %}
+
+<style>
+  h2 {
+    font-size: 2rem;
+    color: #0d6efd;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-align: center;
+  }
+  ul {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+  }
+  ul li {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 15px rgba(13, 110, 253, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  ul li:hover {
+    box-shadow: 0 10px 25px rgba(13, 110, 253, 0.2);
+  }
+  ul li strong {
+    font-size: 1.1rem;
+    color: #212529;
+  }
+  ul li span.vendor {
+    color: #6c757d;
+    margin-left: 10px;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+  form {
+    margin: 0;
+  }
+  form button {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+  }
+  form button:hover {
+    background-color: #084298;
+  }
+  .no-packages {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    font-style: italic;
+    color: #6c757d;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(108, 117, 125, 0.1);
+  }
+</style>
+
+<h2>Admin Panel - Pending Package Approvals</h2>
+
+<ul>
+  {% for pkg in packages %}
+    <li>
+      <div>
+        <strong>{{ pkg.title }}</strong><span class="vendor">by {{ pkg.vendor.username }}</span>
+      </div>
+      <form method="post" action="{% url 'approve_package' pkg.pk %}">
+        {% csrf_token %}
+        <button type="submit">Approve</button>
+      </form>
+    </li>
+  {% empty %}
+    <li class="no-packages">No packages pending approval.</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

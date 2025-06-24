@@ -1,0 +1,31 @@
+{% extends 'travel/base.html' %}
+{% block content %}
+
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card border-0 shadow-lg rounded-4">
+        <div class="card-header bg-danger text-white text-center py-3 rounded-top-4">
+          <h3 class="mb-0 fw-bold">Confirm Delete</h3>
+        </div>
+        <div class="card-body text-center p-4">
+          <p class="fs-5 mb-4">Are you sure you want to delete <strong class="text-danger">"{{ package.title }}"</strong>?</p>
+          <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg px-5 shadow-sm">
+              Yes, Delete
+            </button>
+            <a href="{% url 'package_list' %}" class="btn btn-secondary btn-lg ms-3 px-5 shadow-sm">
+              Cancel
+            </a>
+          </form>
+        </div>
+        <div class="card-footer text-center text-muted small fst-italic py-3 rounded-bottom-4">
+          This action cannot be undone.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

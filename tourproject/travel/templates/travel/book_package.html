@@ -1,0 +1,4 @@
+{% extends 'travel/base.html' %}
+{% block content %}
+
+<h2>Confirm Booking</h2> <p>Do you want to book: {{ package.title }}?</p> <form method="post"> {% csrf_token %} <button type="submit">Confirm Booking</button> </form> {% endblock %}

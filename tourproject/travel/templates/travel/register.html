@@ -1,0 +1,98 @@
+{% extends 'travel/base.html' %}
+{% block content %}
+
+<style>
+  body {
+    background: #f0f4f8;
+  }
+  .register-wrapper {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  .register-card {
+    background: #fff;
+    padding: 40px 35px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    max-width: 480px;
+    width: 100%;
+    transition: transform 0.3s ease;
+  }
+  .register-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+  }
+  .register-title {
+    text-align: center;
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #0d6efd;
+    margin-bottom: 30px;
+    letter-spacing: 1.2px;
+  }
+  form p {
+    margin-bottom: 15px;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 1rem;
+    border: 1.8px solid #ced4da;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 6px rgba(13, 110, 253, 0.4);
+  }
+  .btn-register {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(13, 110, 253, 0.4);
+    transition: background 0.3s ease;
+  }
+  .btn-register:hover {
+    background: linear-gradient(135deg, #0a58ca 0%, #084298 100%);
+  }
+  /* Style for form errors */
+  .errorlist {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    list-style-type: none;
+    padding-left: 0;
+  }
+</style>
+
+<div class="register-wrapper">
+  <div class="register-card">
+    <h2 class="register-title">User Registration</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-register">Register</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
